@@ -3,9 +3,9 @@ kind: Ingress
 metadata:
   name: app-2-ingress
   annotations:
-    nginx.ingress.kubernetes.io/canary-weight: "30"
-    nginx.ingress.kubernetes.io/canary-by-header: "canary"
     nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-header: "canary"
+    nginx.ingress.kubernetes.io/canary-weight: "30"
 spec:
   rules:
   - http:

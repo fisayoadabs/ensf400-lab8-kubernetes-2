@@ -13,7 +13,7 @@ spec:
         app: app-1
     spec:
       containers:
-      - name: app-1
+      - name: app-1-container
         image: ghcr.io/denoslab/ensf400-sample-app:v1
         ports:
         - containerPort: 3000

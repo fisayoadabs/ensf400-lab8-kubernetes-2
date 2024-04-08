@@ -2,9 +2,33 @@
 
 ## Deployment Steps and Outputs
 
+0. Start with these commands
+
 ```bash
 $ minikube start
+😄  minikube v1.32.0 on Ubuntu 20.04 (docker/amd64)
+✨  Automatically selected the docker driver. Other choices: none, ssh
+📌  Using Docker driver with root privileges
+👍  Starting control plane node minikube in cluster minikube
+🚜  Pulling base image ...
+💾  Downloading Kubernetes v1.28.3 preload ...
+    > preloaded-images-k8s-v18-v1...:  403.35 MiB / 403.35 MiB  100.00% 156.76 
+    > gcr.io/k8s-minikube/kicbase...:  453.64 MiB / 453.90 MiB  99.94% 101.18 M
+🔥  Creating docker container (CPUs=2, Memory=2200MB) ...
+🐳  Preparing Kubernetes v1.28.3 on Docker 24.0.7 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔗  Configuring bridge CNI (Container Networking Interface) ...
+    ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: default-storageclass, storage-provisioner
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
+```bash
+$ minikube addons enable ingress
+```
+
 1. Create a **nginx-dep.yaml**: Defines a Deployment for nginx with 5 replicas, using nginx version 1.14.2, exposing port 80. It mounts a ConfigMap for configuration.
 
 ```bash 
@@ -70,22 +94,22 @@ ingress.networking.k8s.io/app-2-ingress created
 ```bash
 $ kubectl get deployments
 NAME        READY   UP-TO-DATE   AVAILABLE   AGE
-app-1-dep   3/3     3            3           55m
-app-2-dep   2/2     2            2           54m
-nginx-dep   0/5     5            0           56m
+app-1-dep   3/3     3            3           2m6s
+app-2-dep   2/2     2            2           106s
+nginx-dep   0/5     5            0           2m44s
 
 $ kubectl get services
-NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)    AGE
-app-1-svc    ClusterIP   10.107.143.193   <none>        8080/TCP   55m
-app-2-svc    ClusterIP   10.106.81.79     <none>        8080/TCP   54m
-kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP    61m
-nginx-svc    ClusterIP   10.108.222.171   <none>        80/TCP     55m
+NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+app-1-svc    ClusterIP   10.100.10.177    <none>        80/TCP    2m22s
+app-2-svc    ClusterIP   10.109.204.31    <none>        80/TCP    119s
+kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP   7m22s
+nginx-svc    ClusterIP   10.105.235.174   <none>        80/TCP    2m48s
 
 $ kubectl get ingresses
-NAME            CLASS    HOSTS   ADDRESS   PORTS   AGE
-app-1-ingress   <none>   *                 80      54m
-app-2-ingress   <none>   *                 80      54m
-nginx-ingress   <none>   *                 80      56m
+NAME            CLASS   HOSTS   ADDRESS        PORTS   AGE
+app-1-ingress   nginx   *       192.168.49.2   80      68s
+app-2-ingress   nginx   *       192.168.49.2   80      58s
+nginx-ingress   nginx   *       192.168.49.2   80      3m4s
 ```
 
 12. Run the curl command
