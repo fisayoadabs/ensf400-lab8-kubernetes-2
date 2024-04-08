@@ -29,17 +29,17 @@ $ minikube start
 $ minikube addons enable ingress
 ```
 
-1. Create a **nginx-dep.yaml**: Defines a Deployment for nginx with 5 replicas, using nginx version 1.14.2, exposing port 80. It mounts a ConfigMap for configuration.
+1. Create a **nginx-configmap.yaml**: Defines a ConfigMap for nginx configuration.
+```bash
+$ kubectl apply -f nginx-configmap.yaml
+configmap/nginx-configmap created
+```
+
+2. Create a **nginx-dep.yaml**: Defines a Deployment for nginx with 5 replicas, using nginx version 1.14.2, exposing port 80. It mounts a ConfigMap for configuration.
 
 ```bash 
 $ kubectl apply -f nginx-dep.yaml
 deployment.apps/nginx-dep created
-```
-
-2. Create a **nginx-configmap.yaml**: Defines a ConfigMap for nginx configuration.
-```bash
-$ kubectl apply -f nginx-configmap.yaml
-configmap/nginx-configmap created
 ```
 
 3. Create a **nginx-svc.yaml**: Defines a Service for nginx with ClusterIP type, exposing port 80.
