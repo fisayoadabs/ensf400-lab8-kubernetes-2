@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: app-1-dep
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: app-1
@@ -15,5 +15,6 @@ spec:
       containers:
       - name: app-1-container
         image: ghcr.io/denoslab/ensf400-sample-app:v1
+        imagePullPolicy: Always
         ports:
         - containerPort: 3000
