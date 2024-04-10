@@ -7,12 +7,10 @@ spec:
   selector:
     matchLabels:
       app: nginx
-      run: nginx-svc
   template:
     metadata:
       labels:
         app: nginx
-        run: nginx-svc
     spec:
       containers:
       - name: nginx

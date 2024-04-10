@@ -15,6 +15,5 @@ spec:
       containers:
       - name: app-1-container
         image: ghcr.io/denoslab/ensf400-sample-app:v1
-        imagePullPolicy: Always
         ports:
         - containerPort: 3000

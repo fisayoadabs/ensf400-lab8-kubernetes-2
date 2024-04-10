@@ -7,6 +7,5 @@ spec:
     app: app-1
   ports:
     - protocol: TCP
-      port: 8080
+      port: 80
       targetPort: 3000
-  type: ClusterIP
