@@ -100,29 +100,7 @@ $ kubectl apply -f app-2-ingress.yaml
 ingress.networking.k8s.io/app-2-ingress created
 ```
 
-11. Verify that each one of the deployments are running along with the services and ingresses
-```bash
-$ kubectl get deployments
-NAME        READY   UP-TO-DATE   AVAILABLE   AGE
-app-1-dep   3/3     3            3           2m6s
-app-2-dep   2/2     2            2           106s
-nginx-dep   0/5     5            0           2m44s
-
-$ kubectl get services
-NAME         TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
-app-1-svc    ClusterIP   10.100.10.177    <none>        80/TCP    2m22s
-app-2-svc    ClusterIP   10.109.204.31    <none>        80/TCP    119s
-kubernetes   ClusterIP   10.96.0.1        <none>        443/TCP   7m22s
-nginx-svc    ClusterIP   10.105.235.174   <none>        80/TCP    2m48s
-
-$ kubectl get ingresses
-NAME            CLASS   HOSTS   ADDRESS        PORTS   AGE
-app-1-ingress   nginx   *       192.168.49.2   80      68s
-app-2-ingress   nginx   *       192.168.49.2   80      58s
-nginx-ingress   nginx   *       192.168.49.2   80      3m4s
-```
-
-12. Run the curl command
+11. Run the curl command
 ```bash
 $ curl http://$(minikube ip)/
 Hello World from [app-1-dep-86f67f4f87-2d28z]!
